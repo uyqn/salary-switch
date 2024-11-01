@@ -1,8 +1,5 @@
 package no.uyqn;
 
-import javax.annotation.processing.SupportedSourceVersion;
-import javax.print.DocFlavor;
-import java.awt.image.AreaAveragingScaleFilter;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
@@ -14,16 +11,15 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        YearMonth endPeriod = YearMonth.of(2027, 5);
+        YearMonth endPeriod = YearMonth.of(2030, 5);
             double expectedSalaryAdjustment = 1.09;
 
         BigDecimal[] bonuses = {BigDecimal.valueOf(69854), BigDecimal.valueOf(59854), BigDecimal.valueOf(42998), BigDecimal.valueOf(36183)};
         BigDecimal averageBonus = Arrays.stream(bonuses).reduce(BigDecimal.ZERO, BigDecimal::add).divide(BigDecimal.valueOf(bonuses.length), 2, RoundingMode.DOWN);
 
-        //736_878
         CompensationRecord tripletex = new CompensationRecord.Builder()
-                .withCurrentAnnualSalary(BigDecimal.valueOf(750_000))
-                .withExpectedSalaryMultiplier(expectedSalaryAdjustment)
+                .withCurrentAnnualSalary(BigDecimal.valueOf(800_000))
+                .withExpectedSalaryMultiplier(1.05)
                 .withFirstSalaryAdjustment(YearMonth.of(2025, 4))
                 .withStartPeriod(YearMonth.now())
                 .build();
@@ -35,7 +31,7 @@ public class Main {
         CompensationRecord bouvet = new CompensationRecord.Builder()
                 .withStartPeriod(YearMonth.of(2025, 1))
                 .withCurrentAnnualSalary(BigDecimal.valueOf(750_000))
-                .withCurrentBonus(BigDecimal.valueOf(70_000))
+                .withCurrentBonus(averageBonus)
                 .withExpectedSalaryMultiplier(expectedSalaryAdjustment)
                 .withFirstSalaryAdjustment(YearMonth.of(2026, 5))
                 .withFirstBonusPayout(YearMonth.of(2026, 5))
